@@ -1,0 +1,29 @@
+clear all
+
+path='C:\Users\Florencia\Documents\Facu\Labo5\Conteo\hist\';
+datos=[path,'primermedicion.csv'];
+A=load(datos);
+M=size(A,2);
+N=2500;
+D=zeros(M,1);
+
+figure (1)
+plot(A(:,1:1))
+
+umbral=10;
+
+for c=1:M  
+    for i=2:N-1
+            if  A(i,c) < A(i-1,c) && A(i,c) < A(i+1,c) && A(i,c) < umbral
+                D(c) = D(c)+1 ;
+            end
+        
+    end
+end        
+
+%figure (2)
+%hist(D(:),[20:1:60])
+%hist(D(:))
+
+figure(4)
+histfit(D(:),30,'poisson')
